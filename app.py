@@ -21,7 +21,7 @@ def add_expense():
         })
         return redirect(url_for("expenses_page"))
 
-    return render_template("add_expense.html", people=people)
+    return render_template("addexpenses.html", people=people)
 
 @app.route("/summary")
 def summary():
