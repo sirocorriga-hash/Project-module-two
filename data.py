@@ -1,3 +1,3 @@
 expenses = []
 
-people = ["Siro", "Housam", "Charles", "Diana"]
+people = ["Siro", "Laura", "Meave", "Patrick"]

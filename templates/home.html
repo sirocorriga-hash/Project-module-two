@@ -1,21 +1,32 @@
 {% extends "base.html" %}
 
+{% block title %}Home - TripSplit{% endblock %}
+
 {% block content %}
+<div class="row justify-content-center align-items-center my-5">
+    <div class="col-md-8 col-lg-6 text-center">
+        
+        <!-- Icona e Titolo Principale -->
+        <div class="mb-4">
+            <i class="bi bi-airplane-engines text-primary display-1 d-block mb-3"></i>
+            <h1 class="fw-extrabold display-4">TripSplit</h1>
+        </div>
 
-<div class="text-center py-5">
+        <!-- Sottotitolo -->
+        <p class="lead text-muted mb-4">
+            Split your travel expenses simply and transparently. No stress, just travel.
+        </p>
 
-    <h1 class="fw-bold">
-        <i class="bi bi-airplane-engines"></i> TripSplit
-    </h1>
+        <!-- Call to Action -->
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a href="/add" class="btn btn-success btn-lg px-4 gap-3 shadow-sm">
+                <i class="bi bi-plus-circle"></i> Add First Expense
+            </a>
+            <a href="/expenses" class="btn btn-outline-secondary btn-lg px-4 shadow-sm">
+                <i class="bi bi-receipt"></i> View Expenses
+            </a>
+        </div>
 
-    <p class="text-muted">
-        Split your travel expenses simply and transparently.
-    </p>
-
-    <a href="/add" class="btn btn-primary btn-lg mt-3">
-        <i class="bi bi-plus-circle"></i> Add First Expense
-    </a>
-
+    </div>
 </div>
-
 {% endblock %}

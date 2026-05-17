@@ -1,38 +1,72 @@
 {% extends "base.html" %}
 
+{% block title %}Add Expense - TripSplit{% endblock %}
+
 {% block content %}
 
-<h3 class="mb-3">
-    <i class="bi bi-plus-circle"></i> Add Expense
-</h3>
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
 
-<form method="POST" class="card p-3 shadow-sm border-0">
+        <h3 class="mb-3 fw-bold">
+            <i class="bi bi-plus-circle text-success"></i> Add Expense
+        </h3>
 
-    <div class="mb-3">
-        <label class="form-label">Description</label>
-        <input type="text" name="description" class="form-control" required>
+        <!-- Form racchiuso in una card stilizzata -->
+        <form method="POST" class="card p-4 shadow-sm border-0 rounded-3 bg-white">
+            
+            <!-- Includi questo se usi la protezione CSRF di Flask-WTF -->
+            {# <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> #}
+
+            <!-- Campo Descrizione -->
+            <div class="mb-3">
+                <label for="description" class="form-label fw-semibold">Description</label>
+                <input type="text" 
+                       id="description" 
+                       name="description" 
+                       class="form-control" 
+                       placeholder="e.g., Dinner at the beach, Fuel, Museum tickets" 
+                       required>
+            </div>
+
+            <!-- Campo Importo -->
+            <div class="mb-3">
+                <label for="amount" class="form-label fw-semibold">Amount (€)</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light">€</span>
+                    <input type="number" 
+                           step="0.01" 
+                           min="0.01"
+                           inputmode="decimal"
+                           id="amount" 
+                           name="amount" 
+                           class="form-control" 
+                           placeholder="0.00" 
+                           required>
+                </div>
+            </div>
+
+            <!-- Campo Chi ha pagato -->
+            <div class="mb-4">
+                <label for="paid_by" class="form-label fw-semibold">Paid by</label>
+                <select id="paid_by" name="paid_by" class="form-select" required>
+                    <option value="" disabled selected>Select who paid...</option>
+                    {% for p in people %}
+                    <option value="{{ p }}">{{ p }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Pulsanti di Azione -->
+            <div class="d-flex gap-2 justify-content-end">
+                <a href="/expenses" class="btn btn-light border">Cancel</a>
+                <button type="submit" class="btn btn-success px-4">
+                    <i class="bi bi-check-circle"></i> Save Expense
+                </button>
+            </div>
+
+        </form>
+
     </div>
-
-    <div class="mb-3">
-        <label class="form-label">Amount</label>
-        <input type="number" step="0.01" name="amount" class="form-control" required>
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Paid by</label>
-        <select name="paid_by" class="form-select">
-
-            {% for p in people %}
-            <option value="{{ p }}">{{ p }}</option>
-            {% endfor %}
-
-        </select>
-    </div>
-
-    <button class="btn btn-success">
-        <i class="bi bi-check-circle"></i> Save
-    </button>
-
-</form>
+</div>
 
 {% endblock %}
