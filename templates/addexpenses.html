@@ -11,13 +11,13 @@
             <i class="bi bi-plus-circle text-success"></i> Add Expense
         </h3>
 
-        <!-- Form racchiuso in una card stilizzata -->
+
         <form method="POST" class="card p-4 shadow-sm border-0 rounded-3 bg-white">
             
-            <!-- Includi questo se usi la protezione CSRF di Flask-WTF -->
+    
             {# <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"> #}
 
-            <!-- Campo Descrizione -->
+
             <div class="mb-3">
                 <label for="description" class="form-label fw-semibold">Description</label>
                 <input type="text" 
@@ -28,7 +28,7 @@
                        required>
             </div>
 
-            <!-- Campo Importo -->
+   
             <div class="mb-3">
                 <label for="amount" class="form-label fw-semibold">Amount (€)</label>
                 <div class="input-group">
@@ -45,7 +45,7 @@
                 </div>
             </div>
 
-            <!-- Campo Chi ha pagato -->
+
             <div class="mb-4">
                 <label for="paid_by" class="form-label fw-semibold">Paid by</label>
                 <select id="paid_by" name="paid_by" class="form-select" required>
@@ -56,7 +56,7 @@
                 </select>
             </div>
 
-            <!-- Pulsanti di Azione -->
+        
             <div class="d-flex gap-2 justify-content-end">
                 <a href="/expenses" class="btn btn-light border">Cancel</a>
                 <button type="submit" class="btn btn-success px-4">
