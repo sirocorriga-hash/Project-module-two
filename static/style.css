@@ -36,6 +36,5 @@ footer {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;  
     
-    /* 3. Sicurezza per i browser vecchissimi che non supportano nessuno dei precedenti */
     overflow: hidden;
 }
