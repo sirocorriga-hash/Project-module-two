@@ -20,7 +20,6 @@
             <div class="list-group list-group-flush">
                 
                 {% for person, balance in balances.items() %}
-                {# Fix per evitare il bug visivo del -0.00 #}
                 {% set clean_balance = 0.0 if balance | abs < 0.005 else balance %}
                 
                 <div class="list-group-item d-flex justify-content-between align-items-center py-3">
@@ -44,7 +43,6 @@
 
 
                     <div class="fw-bold fs-5 {% if clean_balance > 0 %}text-success{% elif clean_balance < 0 %}text-danger{% else %}text-muted{% endif %}">
-                        {# Se il saldo è positivo, aggiungiamo il segno + esplicito #}
                         {% if clean_balance > 0 %}+{% endif %}€{{ "%.2f"|format(clean_balance) }}
                     </div>
 
