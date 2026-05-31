@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from data import expenses, people
+from data import expenses, people, users
 
 app = Flask(__name__)
 
@@ -38,5 +38,36 @@ def summary():
 
     return render_template("summary.html", balances=balances)
 
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    if request.method == "POST":
+        username = request.form["username"]
+        if username not in people:
+            people.append(username) 
+            users.append({"username": username})
+        return redirect(url_for("home"))
+    
+    return render_template("signup.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
+    class Counter:
+
+        def __init__(self):
+
+            self.value = 0
+
+ 
+
+    def decrement(self, amount=1):
+
+        self.value -= amount
+
+        
+
+    def reset(self):
+
+        self.value = 0
