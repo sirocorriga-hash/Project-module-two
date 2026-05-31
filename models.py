@@ -19,7 +19,7 @@ class ExpenseManager:
             self.people.append(name)
 
     def calculate_balances(self):
-        balances = {p: 0 for p in self.people}
+        balances = {p: 0.0 for p in self.people}
         if not self.people:
             return balances
             
