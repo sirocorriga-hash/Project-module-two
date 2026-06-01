@@ -1,35 +1,53 @@
-
 class Expense:
-    def __init__(self, description, amount, paid_by):
+    def __init__(self, description, amount, paid_by, participants):
         self.description = description
         self.amount = float(amount)
         self.paid_by = paid_by
+        self.participants = participants
+
 
 class ExpenseManager:
     def __init__(self):
         self.expenses = []
         self.people = []
 
-    def add_expense(self, description, amount, paid_by):
-        new_expense = Expense(description, amount, paid_by)
-        self.expenses.append(new_expense)
-
     def add_person(self, name):
-        if name not in self.people:
+        name = name.strip()
+        if name and name not in self.people:
             self.people.append(name)
+
+    def add_expense(self, description, amount, paid_by, participants):
+        amount = float(amount)
+
+        if paid_by not in self.people:
+            raise ValueError("Payer must be in people list")
+
+        if not participants:
+            raise ValueError("At least one participant is required")
+
+        for p in participants:
+            if p not in self.people:
+                raise ValueError(f"Unknown participant: {p}")
+
+        self.expenses.append(
+            Expense(description, amount, paid_by, participants)
+        )
 
     def calculate_balances(self):
         balances = {p: 0.0 for p in self.people}
-        if not self.people:
-            return balances
-            
+
         for e in self.expenses:
-            share = e.amount / len(self.people)
-            for p in self.people:
-                if p == e.paid_by:
-                    balances[p] += e.amount - share
-                else:
-                    balances[p] -= share
+            participants = e.participants
+            share = e.amount / len(participants)
+
+            # everyone in the split owes their share
+            for p in participants:
+                balances[p] -= share
+
+            # payer gets reimbursed full amount
+            balances[e.paid_by] += e.amount
+
         return balances
+
 
 manager = ExpenseManager()
