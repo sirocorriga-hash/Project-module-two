@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for 
+from flask import request, redirect, url_for, render_template, flash
 from models import manager 
 
 app = Flask(__name__)
@@ -27,12 +28,18 @@ def summary():
     balances = manager.calculate_balances()
     return render_template("summary.html", balances=balances)
 
+
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
-        manager.add_person(request.form["username"])
-        return redirect(url_for("home"))
+        username = request.form.get("username")
+        if username:
+            manager.add_person(username)
+            return redirect(url_for("home"))
+            
+    # Questo serve per mostrare la pagina del form la prima volta
     return render_template("signup.html")
+   
 
 if __name__ == "__main__":
     app.run(debug=True)
