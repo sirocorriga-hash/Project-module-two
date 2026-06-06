@@ -63,20 +63,20 @@ def summary():
     return render_template("summary.html", balances=balances)
 
 
-@app.route("/login", methods=["GET", "POST"])
-def login():
+@app.route("/addperson", methods=["GET", "POST"])
+def add_person():
     if request.method == "POST":
         username = request.form.get("username", "").strip()
 
         if not username:
             flash("Username is required!", "danger")
-            return redirect(url_for("login"))
+            return redirect(url_for("addperson"))
 
         manager.add_person(username)
         flash("User added successfully!", "success")
         return redirect(url_for("home"))
 
-    return render_template("login.html")
+    return render_template("addperson.html")
 
 
 if __name__ == "__main__":
