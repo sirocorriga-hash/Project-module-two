@@ -41,10 +41,27 @@ G --> G1[GET /summary]
 G1 --> G2[manager.calculate_balances]
 G2 --> G3[Render Summary Table]
 G3 --> B
-Quick Start Guide
+
+
+## The app will be accessible at http://127.0.0.1:5000 and on https://siro-flask-demo.onrender.com/
+
+## Project Structure
+app.py: Main controller handling Flask routes and interaction logic.
+models.py: Contains the ExpenseManager class and the balance calculation logic.
+/templates/: HTML files that compose the application views.
+/static/: CSS files (style.css) and static assets.
+
+## Contributing
+This project is open to contributions. If you have ideas to improve the balance algorithm or want to implement persistent database support, feel free to open an Issue or submit a Pull Request.
+
+## Quick Start Guide
+
 Clone the repository:
-git clone [https://github.com/your-username/splitz.git](https://github.com/your-username/splitz.git)
+g
+it clone [https://github.com/your-username/splitz.git](https://github.com/your-username/splitz.git)
+
 cd splitz
+
 
 ## **Set up a virtual environment:**
 ```bash
@@ -57,14 +74,3 @@ pip install flask
 Run the application:
 python app.py
 
-## The app will be accessible at http://127.0.0.1:5000 and on https://siro-flask-demo.onrender.com/
-
-## Project Structure
-app.py: Main controller handling Flask routes and interaction logic.
-models.py: Contains the ExpenseManager class and the balance calculation logic.
-/templates/: HTML files that compose the application views.
-/static/: CSS files (style.css) and static assets.
-
-
-## Contributing
-This project is open to contributions. If you have ideas to improve the balance algorithm or want to implement persistent database support, feel free to open an Issue or submit a Pull Request.
