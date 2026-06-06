@@ -63,20 +63,20 @@ def summary():
     return render_template("summary.html", balances=balances)
 
 
-@app.route("/signup", methods=["GET", "POST"])
-def signup():
+@app.route("/login", methods=["GET", "POST"])
+def login():
     if request.method == "POST":
         username = request.form.get("username", "").strip()
 
         if not username:
             flash("Username is required!", "danger")
-            return redirect(url_for("signup"))
+            return redirect(url_for("login"))
 
         manager.add_person(username)
         flash("User added successfully!", "success")
         return redirect(url_for("home"))
 
-    return render_template("signup.html")
+    return render_template("login.html")
 
 
 if __name__ == "__main__":
