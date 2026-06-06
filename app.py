@@ -7,7 +7,11 @@ app.secret_key = "dev-key"
 
 @app.route("/")
 def home():
-    return render_template("home.html")
+    stats = {
+        "num_expenses": len(manager.expenses),
+        "num_people": len(manager.people)
+    }
+    return render_template("home.html", stats=stats)
 
 
 @app.route("/expenses")

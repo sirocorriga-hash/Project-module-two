@@ -19,6 +19,18 @@ footer {
     font-size: 0.9rem;
 }
 
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto; /* Questo spinge il footer verso il basso */
+}
 .link-hover {
     transition: opacity 0.2s ease-in-out, text-decoration 0.2s ease-in-out;
 }
