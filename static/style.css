@@ -29,7 +29,7 @@ body {
 }
 
 main {
-    flex: 1 0 auto; /* Questo spinge il footer verso il basso */
+    flex: 1 0 auto; 
 }
 .link-hover {
     transition: opacity 0.2s ease-in-out, text-decoration 0.2s ease-in-out;
