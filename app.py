@@ -1,9 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from models import manager
+from flask import sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.secret_key = "dev-key"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///expenses.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False    
 
+db = SQLAlchemy(app)
 
 @app.route("/")
 def home():
