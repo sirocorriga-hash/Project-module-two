@@ -5,8 +5,6 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
-# Association table for the many-to-many relationship between an Expense
-# and the Persons who participate in splitting it.
 expense_participants = db.Table(
     "expense_participants",
     db.Column("expense_id", db.Integer, db.ForeignKey("expense.id"), primary_key=True),
@@ -23,8 +21,6 @@ class Person(db.Model):
     def __repr__(self):
         return self.username
 
-    # Lets Jinja print a Person the same way it used to print a plain
-    # username string, e.g. {{ person }} or f"{person}".
     def __str__(self):
         return self.username
 
@@ -44,8 +40,7 @@ class Expense(db.Model):
         "Person", secondary=expense_participants, backref="expenses"
     )
 
-    # Convenience properties so the rest of the app (and the templates)
-    # can keep working with plain usernames, exactly like before.
+
     @property
     def paid_by(self):
         return self.payer.username

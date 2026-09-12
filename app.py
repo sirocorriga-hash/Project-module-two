@@ -5,8 +5,8 @@ from models import db, manager, Person
 app = Flask(__name__)
 app.secret_key = "dev-key"
 
+
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" 
-)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)

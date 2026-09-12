@@ -42,10 +42,11 @@ block content %}
       <h5 class="mb-3">Group members</h5>
 
       {% if existing_people %}
-      <ul class="list-group list-group-flush">
-        {%- for p in existing_people %}
-        <li
+      <div class="list-group list-group-flush" role="list">
+        {%- for p in existing_people -%}
+        <div
           class="list-group-item d-flex justify-content-between align-items-center px-0"
+          role="listitem"
         >
           <span
             ><i class="bi bi-person-circle text-secondary"></i> {{ p.username
@@ -66,9 +67,9 @@ block content %}
               <i class="bi bi-trash"></i>
             </button>
           </form>
-        </li>
-        {%- endfor %}
-      </ul>
+        </div>
+        {%- endfor -%}
+      </div>
       {% else %}
       <p class="text-muted mb-0">No one added yet.</p>
       {% endif %}
