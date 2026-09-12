@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}Add Expense - Splitz{% endblock %}
+{% block title %}Edit Expense - Splitz{% endblock %}
 
 {% block content %}
 
 <div class="row justify-content-center">
     <div class="col-md-8 col-lg-6">
+
 
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
@@ -19,7 +20,7 @@
         {% endwith %}
 
         <h3 class="mb-3 fw-bold">
-            <i class="bi bi-plus-circle text-success"></i> Add Expense
+            <i class="bi bi-pencil-square text-primary"></i> Edit Expense
         </h3>
 
         <form method="POST" class="card p-4 shadow-sm border-0 rounded-3 bg-white">
@@ -30,7 +31,7 @@
                        id="description"
                        name="description"
                        class="form-control"
-                       placeholder="e.g., Dinner at the beach, Fuel, Museum tickets"
+                       value="{{ expense.description }}"
                        required>
             </div>
 
@@ -45,7 +46,7 @@
                            id="amount"
                            name="amount"
                            class="form-control"
-                           placeholder="0.00"
+                           value="{{ '%.2f'|format(expense.amount) }}"
                            required>
                 </div>
             </div>
@@ -53,14 +54,13 @@
             <div class="mb-3">
                 <label for="paid_by" class="form-label fw-semibold">Paid by</label>
                 <select id="paid_by" name="paid_by" class="form-select" required>
-                    <option value="" disabled selected>Select who paid...</option>
+                    <option value="" disabled>Select who paid...</option>
                     {% for p in people %}
-                    <option value="{{ p }}">{{ p }}</option>
+                    <option value="{{ p }}" {% if p == expense.paid_by %}selected{% endif %}>{{ p }}</option>
                     {% endfor %}
                 </select>
             </div>
 
-            
             <div class="mb-4">
                 <label class="form-label fw-semibold">Participants</label>
 
@@ -70,7 +70,8 @@
                            type="checkbox"
                            name="participants"
                            value="{{ p }}"
-                           id="p_{{ loop.index }}">
+                           id="p_{{ loop.index }}"
+                           {% if p in expense.participants %}checked{% endif %}>
                     <label class="form-check-label" for="p_{{ loop.index }}">
                         {{ p }}
                     </label>
@@ -80,8 +81,8 @@
 
             <div class="d-flex gap-2 justify-content-end">
                 <a href="{{ url_for('expenses_page') }}" class="btn btn-light border">Cancel</a>
-                <button type="submit" class="btn btn-success px-4">
-                    <i class="bi bi-check-circle"></i> Save Expense
+                <button type="submit" class="btn btn-primary px-4">
+                    <i class="bi bi-check-circle"></i> Save Changes
                 </button>
             </div>
 
