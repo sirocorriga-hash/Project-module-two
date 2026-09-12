@@ -1,12 +1,10 @@
-
-
 from flask import Flask, render_template, request, redirect, url_for, flash
 from models import db, manager
 
 app = Flask(__name__)
 app.secret_key = "dev-key"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///splitz.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///splitz.db"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
 
@@ -16,19 +14,13 @@ with app.app_context():
 
 @app.route("/")
 def home():
-    stats = {
-        "num_expenses": len(manager.expenses),
-        "num_people": len(manager.people)
-    }
+    stats = {"num_expenses": len(manager.expenses), "num_people": len(manager.people)}
     return render_template("home.html", stats=stats)
 
 
 @app.route("/expenses")
 def expenses_page():
-    return render_template(
-        "expenses.html",
-        expenses=manager.expenses
-    )
+    return render_template("expenses.html", expenses=manager.expenses)
 
 
 @app.route("/add", methods=["GET", "POST"])
@@ -40,7 +32,6 @@ def add_expense():
             paid_by = request.form.get("paid_by", "").strip()
             participants = request.form.getlist("participants")
 
-                        
             if not description or not amount or not paid_by:
                 flash("All fields are required!", "danger")
                 return redirect(url_for("add_expense"))
@@ -60,10 +51,7 @@ def add_expense():
             flash(f"Unexpected error: {str(e)}", "danger")
             return redirect(url_for("add_expense"))
 
-    return render_template(
-        "addexpenses.html",
-        people=manager.people
-    )
+    return render_template("addexpenses.html", people=manager.people)
 
 
 @app.route("/summary")
