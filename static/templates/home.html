@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Splitz{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="text-center mb-5">
+        <i class="bi bi-airplane-engines text-primary display-1 d-block mb-3"></i>
+        <h1 class="fw-extrabold display-4">Splitz</h1>
+        <p class="lead text-muted">
+            Split your travel expenses simply and transparently. No stress, just travel.
+        </p>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+        
+        <div class="col">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body text-center">
+                    <i class="bi bi-people display-6 text-primary"></i>
+                    <h5 class="card-title mt-3">Participants</h5>
+                    <p class="card-text display-6 fw-bold">{{ stats.num_people }}</p>
+                    <a href="{{ url_for('add_person') }}" class="btn btn-outline-primary btn-sm">Add Person</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body text-center">
+                    <i class="bi bi-receipt display-6 text-success"></i>
+                    <h5 class="card-title mt-3">Total Expenses</h5>
+                    <p class="card-text display-6 fw-bold">{{ stats.num_expenses }}</p>
+                    <a href="{{ url_for('add_expense') }}" class="btn btn-outline-success btn-sm">Add Expense</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body text-center">
+                    <i class="bi bi-graph-up display-6 text-warning"></i>
+                    <h5 class="card-title mt-3">Summary</h5>
+                    <p class="card-text mt-3 text-muted">View who owes what and keep track of balances.</p>
+                    <a href="{{ url_for('summary') }}" class="btn btn-outline-warning btn-sm">View Summary</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}run 
