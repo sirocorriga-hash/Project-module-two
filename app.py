@@ -1,12 +1,17 @@
 
 
 from flask import Flask, render_template, request, redirect, url_for, flash
-from models import manager
+from models import db, manager
 
 app = Flask(__name__)
 app.secret_key = "dev-key"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///expenses.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False    
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///splitz.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db.init_app(app)
+
+with app.app_context():
+    db.create_all()
 
 
 @app.route("/")
