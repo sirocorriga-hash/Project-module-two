@@ -1,10 +1,14 @@
+import os
+
 from flask import Flask, render_template, request, redirect, url_for, flash
 from models import db, manager, Person, Expense
+
+basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
 app.secret_key = "dev-key"
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///splitz.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(basedir, "splitz.db")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
@@ -39,7 +43,6 @@ def add_expense():
             paid_by = request.form.get("paid_by", "").strip()
             participants = request.form.getlist("participants")
 
-            # validation
             if not description or not amount or not paid_by:
                 flash("All fields are required!", "danger")
                 return redirect(url_for("add_expense"))
