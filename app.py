@@ -8,7 +8,9 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 app.secret_key = "dev-key"
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(basedir, "splitz.db")
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(
+    basedir, "splitz.db"
+)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
@@ -19,19 +21,13 @@ with app.app_context():
 
 @app.route("/")
 def home():
-    stats = {
-        "num_expenses": len(manager.expenses),
-        "num_people": len(manager.people)
-    }
+    stats = {"num_expenses": len(manager.expenses), "num_people": len(manager.people)}
     return render_template("home.html", stats=stats)
 
 
 @app.route("/expenses")
 def expenses_page():
-    return render_template(
-        "expenses.html",
-        expenses=manager.expenses
-    )
+    return render_template("expenses.html", expenses=manager.expenses)
 
 
 @app.route("/add", methods=["GET", "POST"])
@@ -62,10 +58,7 @@ def add_expense():
             flash(f"Unexpected error: {str(e)}", "danger")
             return redirect(url_for("add_expense"))
 
-    return render_template(
-        "addexpenses.html",
-        people=manager.people
-    )
+    return render_template("addexpenses.html", people=manager.people)
 
 
 @app.route("/expenses/<int:expense_id>/edit", methods=["GET", "POST"])
@@ -83,7 +76,9 @@ def edit_expense(expense_id):
                 flash("All fields are required!", "danger")
                 return redirect(url_for("edit_expense", expense_id=expense_id))
 
-            manager.update_expense(expense_id, description, amount, paid_by, participants)
+            manager.update_expense(
+                expense_id, description, amount, paid_by, participants
+            )
 
             flash("Expense updated successfully!", "success")
             return redirect(url_for("expenses_page"))
@@ -96,11 +91,7 @@ def edit_expense(expense_id):
             flash(f"Unexpected error: {str(e)}", "danger")
             return redirect(url_for("edit_expense", expense_id=expense_id))
 
-    return render_template(
-        "editexpense.html",
-        expense=expense,
-        people=manager.people
-    )
+    return render_template("editexpense.html", expense=expense, people=manager.people)
 
 
 @app.route("/expenses/<int:expense_id>/delete", methods=["POST"])
@@ -134,8 +125,7 @@ def add_person():
         return redirect(url_for("add_person"))
 
     return render_template(
-        "addperson.html",
-        existing_people=Person.query.order_by(Person.username).all()
+        "addperson.html", existing_people=Person.query.order_by(Person.username).all()
     )
 
 
